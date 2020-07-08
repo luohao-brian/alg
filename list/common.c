@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Node* create_list (unsigned int n) {
+Node* list_create (unsigned int n) {
     Node* head = NULL;
     Node* tail = NULL;
 
@@ -22,7 +22,7 @@ Node* create_list (unsigned int n) {
     return head;
 }
 
-void destroy_list (Node* head) {
+void list_destroy (Node* head) {
     while (head != NULL) {
         Node* next = head->next;
         free (head);
@@ -30,7 +30,7 @@ void destroy_list (Node* head) {
     }
 }
 
-void print_list(Node* head) {
+void list_print(Node* head) {
     printf("[");
     while (head != NULL) {
         if(head->next == NULL) printf("%d", head->data);

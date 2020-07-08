@@ -8,9 +8,9 @@
  * 递归方式：
  * https://zhuanlan.zhihu.com/p/86745433
  */
-Node* reverse_list (Node *head) {
+Node* list_reverse (Node *head) {
     if (head->next == NULL) return head;
-    Node* last = reverse_list(head->next);
+    Node* last = list_reverse(head->next);
     head->next->next = head;
     head->next = NULL;
     return last;
@@ -20,7 +20,7 @@ Node* reverse_list (Node *head) {
  * 双指针方式:
  * https://zhuanlan.zhihu.com/p/75576160
  */
-Node* reverse_list2 (Node *head) {
+Node* list_reverse2 (Node *head) {
     Node* pre = NULL;
     Node* cur = head;
 
@@ -35,13 +35,13 @@ Node* reverse_list2 (Node *head) {
 }
 
 int main () {
-    Node* head = create_list(10);
+    Node* head = list_create(10);
     printf("Before list_reverse\n");
-    print_list(head);
-    head = reverse_list2(head);
+    list_print(head);
+    head = list_reverse2(head);
     printf("After list_reverse\n");
-    print_list(head);
-    destroy_list(head);
+    list_print(head);
+    list_destroy(head);
 
     return 0;
 }

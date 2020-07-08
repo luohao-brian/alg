@@ -3,8 +3,8 @@
 
 #include "list.h"
 
-extern Node*    create_list (unsigned int n);
-extern void     destroy_list (Node* head);
-extern void     print_list (Node* head);
+extern Node*    list_create (unsigned int n);
+extern void     list_destroy (Node* head);
+extern void     list_print (Node* head);
 
 #endif
