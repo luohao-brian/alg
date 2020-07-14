@@ -19,16 +19,17 @@ Node* list_reverse_recursive (Node *head) {
 /*
  * 双指针方式:
  * https://zhuanlan.zhihu.com/p/75576160
+ * https://blog.csdn.net/qq_17550379/article/details/80647926
  */
 Node* list_reverse (Node *head) {
     Node* pre = NULL;
     Node* cur = head;
 
     while (cur != NULL) {
-        Node* temp = cur->next;
+        Node* lat = cur->next;
         cur->next = pre;
         pre = cur;
-        cur = temp;
+        cur = lat;
     }
 
     return pre;
