@@ -35,19 +35,19 @@ Node* list_reverse (Node *head) {
 }
 
 
-static void __list_reverse (Node** begin, Node** end) {
-    Node* listBegin = *begin;
-    Node* listEnd = *end;
-    if(listBegin->next == NULL || *end == NULL || listBegin->next == listEnd)
-        return;
-    Node* reserveEnd = listBegin->next;
-    while(listBegin->next != listEnd)
+static Node* __list_reverse (Node* pre, Node* lat) {
+    Node* lpre = pre->next;
+    Node* cur = lpre->next;
+
+    while(cur != lat)
     {
-        Node* tmp = listBegin->next;
-        listBegin->next = reserveEnd->next;
-        reserveEnd->next = reserveEnd->next->next; 
-        listBegin->next->next = tmp;
+        lpre->next = cur->next;
+        cur->next = pre->next;
+        pre->next = cur;
+        cur = lpre->next;
     }
+
+    return lpre;
 }
 
 /*
@@ -59,34 +59,28 @@ static void __list_reverse (Node** begin, Node** end) {
  * Ref: https://blog.csdn.net/qq_17550379/article/details/80696835
  */
 Node* list_reverse_every_nx (Node *head, unsigned int n) {
-    Node* listHead = malloc(sizeof(Node));
-    listHead->data = -1;
-    listHead->next = head;
+    Node* h = malloc(sizeof(Node));
+    h->data = -1;
+    h->next = head;
 
-    Node* begin = NULL;
-    Node* end = NULL;
-    Node* cur = listHead;
+    Node* pre = h;
+    Node* cur = head;
+    unsigned int k = 1;
 
     while (cur != NULL) {
-        unsigned int k = n;
-        begin = cur;
-        //begin->next为翻转后的末尾值
-        Node* reserveEnd = begin->next;
-        while(cur != NULL &&  k > 0)
-        {
+        if (k % n == 0) {
+            pre = __list_reverse(pre, cur->next);
+            cur = pre->next;
+        } else {
             cur = cur->next;
-            --k;
         }
-        end = cur;
 
-        __list_reverse(&begin, &end);
-        if(cur != NULL)
-            cur = reserveEnd;
+        k ++;
     }
 
-    Node* retNode = listHead->next;
-    free(listHead);
-    return retNode;
+    Node* r = h->next;
+    free(h);
+    return r;
 }
 
 /*
